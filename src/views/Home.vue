@@ -81,6 +81,25 @@
           </v-btn>
         </v-row>
       </template>
+      <template v-slot:loading>
+        <v-progress-linear
+          indeterminate
+          color="green"
+        ></v-progress-linear>
+        <v-img class="ma-auto" src="../assets/loading.png" height="45%" width="45%"></v-img>
+      </template>
+      <template v-slot:no-results>
+        <h3 class="text-h3">
+          Results Not Found
+        </h3>
+        <v-img class="ma-auto" src="../assets/noresults.png" height="45%" width="45%"></v-img>
+      </template>
+      <template v-slot:no-data>
+        <h3 class="text-h3">
+          No Data available. Retry after 2 min.
+          <v-img class="ma-auto" src="../assets/nodata.png" height="45%" width="45%"></v-img>
+        </h3>
+      </template>
     </v-data-iterator>
   </v-container>
 </template>
@@ -100,16 +119,21 @@ export default {
       loading: true,
       breedsDataPerPage: 8,
       breedsData: [],
+      error: false,
     };
   },
   mounted() {
     axios
       .get('https://api.thecatapi.com/v1/breeds')
       .then(this.setBreedsData)
-      .catch();
+      .catch(() => {
+        this.error = true;
+        this.loading = false;
+      });
   },
   methods: {
     setBreedsData(response) {
+      console.log(response.data);
       this.breedsData = response.data;
     },
     nextPage() {
