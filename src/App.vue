@@ -1,7 +1,7 @@
 <template>
   <!-- App.vue -->
 
-  <v-app>
+  <v-app class="bg-color">
     <!-- Sizes your content based upon application components -->
     <v-main>
       <!-- Provides the application the proper gutter -->
@@ -27,4 +27,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bg-color {
+  background-color: #DCE0E8 !important;
+}
+</style>
