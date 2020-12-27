@@ -1,10 +1,5 @@
 <template>
   <v-container fluid>
-    <router-link to="/" class="text-h2 font-weight-bold mb-5 black--text no-underline">
-      <span class="heading">
-        Cat Breeds
-      </span>
-    </router-link>
     <v-data-iterator
       :items="breedsData"
       :search="search"
@@ -17,8 +12,15 @@
       class="accent mt-4"
     >
       <template v-slot:header>
-        <v-row align="center" justify="end">
-          <v-col cols="12" md="5" sm="12" xs="12">
+        <v-row justify="end">
+          <v-col cols="12" md="6" sm="12" xs="12">
+            <router-link to="/" class="text-h2 font-weight-bold mb-5 black--text no-underline">
+              <span class="heading ma-3">
+                Cat Breeds
+              </span>
+            </router-link>
+          </v-col>
+          <v-col cols="12" md="6" sm="12" xs="12">
             <v-toolbar color="transparent" flat class="mb-3">
               <v-text-field
                 v-model="search"
@@ -39,6 +41,7 @@
               <BreedCard
                 :breedName=breed.name
                 :breedUrl=breed.image.url
+                :breedSpan=breed.life_span
               />
             </v-container>
           </v-col>
@@ -86,19 +89,22 @@
           indeterminate
           color="green"
         ></v-progress-linear>
+        <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots">
+          Loading.....
+        </h3>
         <v-img class="ma-auto" src="../assets/loading.png" height="45%" width="45%"></v-img>
       </template>
       <template v-slot:no-results>
-        <h3 class="text-h3">
+        <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots">
           Results Not Found
         </h3>
         <v-img class="ma-auto" src="../assets/noresults.png" height="45%" width="45%"></v-img>
       </template>
       <template v-slot:no-data>
-        <h3 class="text-h3">
+        <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots">
           No Data available. Retry after 2 min.
-          <v-img class="ma-auto" src="../assets/nodata.png" height="45%" width="45%"></v-img>
         </h3>
+        <v-img class="ma-auto" src="../assets/nodata.png" height="45%" width="45%"></v-img>
       </template>
     </v-data-iterator>
   </v-container>
@@ -161,9 +167,14 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,900&display=swap');
 
 .heading {
   font-family: 'Lobster', cursive !important;
+}
+
+.all-slots {
+  font-family: 'Merriweather', serif;
 }
 
 .img-size {
