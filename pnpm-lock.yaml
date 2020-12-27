@@ -4,6 +4,7 @@ dependencies:
   '@fortawesome/free-regular-svg-icons': 5.15.1
   '@fortawesome/free-solid-svg-icons': 5.15.1
   '@fortawesome/vue-fontawesome': 2.0.2_765c58e9cf3f5cae99a1172f3117b02e
+  axios: 0.21.1
   core-js: 3.8.1
   register-service-worker: 1.7.2
   vue: 2.6.12
@@ -2488,6 +2489,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+  /axios/0.21.1:
+    dependencies:
+      follow-redirects: 1.13.1
+    dev: false
+    resolution:
+      integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   /babel-code-frame/6.26.0:
     dependencies:
       chalk: 1.1.3
@@ -5276,6 +5283,17 @@ packages:
     dev: true
     resolution:
       integrity: sha512-3Z4XhFZ3992uIq0XOqb9AreonueSYphE6oYbpt5+3u06JWklbsPkNv3ZKkP9Bz/r+1MWCaMoSQ28P85+1Yc77w==
+  /follow-redirects/1.13.1:
+    dev: false
+    engines:
+      node: '>=4.0'
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    resolution:
+      integrity: sha512-SSG5xmZh1mkPGyKzjZP8zLjltIfpW32Y5QpdNJyjcfGxK3qo3NDDkZOZSFiGn1A6SclQxY9GzEwAHQ3dmYRWpg==
   /follow-redirects/1.13.1_debug@4.3.1:
     dependencies:
       debug: 4.3.1_supports-color@6.1.0
@@ -12288,6 +12306,7 @@ specifiers:
   '@vue/eslint-config-airbnb': ^5.0.2
   '@vue/eslint-config-typescript': ^5.0.2
   '@vue/test-utils': ^1.0.3
+  axios: ^0.21.1
   chai: ^4.1.2
   chromedriver: ^84.0.1
   core-js: ^3.6.5
