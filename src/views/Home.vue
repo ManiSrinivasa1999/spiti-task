@@ -96,7 +96,7 @@
         </h3>
         <v-img
           class="ma-auto"
-          src="../assets/loading.png"
+          src="../assets/loading.svg"
           height="50vh"
           width="50vw"
           contain
@@ -109,7 +109,7 @@
         </h3>
         <v-img
           class="ma-auto"
-          src="../assets/noresults.png"
+          src="../assets/noresults.svg"
           height="50vh"
           width="50vw"
           contain
@@ -122,7 +122,7 @@
         </h3>
         <v-img
           class="ma-auto"
-          src="../assets/nodata.png"
+          src="../assets/nodata.svg"
           height="50vh"
           width="50vw"
           contain
@@ -166,7 +166,6 @@ export default {
   },
   methods: {
     setBreedsData(response) {
-      console.log(response.data);
       this.breedsData = response.data;
     },
     nextPage() {
@@ -182,6 +181,22 @@ export default {
   computed: {
     numberOfPages() {
       return Math.ceil(this.breedsData.length / this.breedsDataPerPage);
+    },
+    filteredBreedsData() {
+      const breeds = [];
+      this.breedsData.forEach((breed) => {
+        console.log(breed.image.url);
+        if (breed.image.url !== '') {
+          breeds.push({
+            name: breed.name,
+            url: breed.image.url,
+            lifeSpan: breed.life_span,
+            energyLevel: breed.energy_level,
+            childFriendly: breed.child_friendly,
+          });
+        }
+      });
+      return breeds;
     },
   },
 };
