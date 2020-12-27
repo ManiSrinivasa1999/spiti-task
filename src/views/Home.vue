@@ -36,12 +36,14 @@
       </template>
       <template v-slot:default="props">
         <v-row>
-          <v-col cols="12" xl="3" lg="3" md="6" sm="10" v-for="(breed, i) in props.items" :key="i">
+          <v-col cols="12" xl="3" lg="4" md="6" sm="10" v-for="(breed, i) in props.items" :key="i">
             <v-container fluid>
               <BreedCard
                 :breedName=breed.name
                 :breedUrl=breed.image.url
                 :breedSpan=breed.life_span
+                :breedEnergyLevel=breed.energy_level
+                :breedChildFriendly=breed.child_friendly
               />
             </v-container>
           </v-col>
@@ -92,19 +94,40 @@
         <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots">
           Loading.....
         </h3>
-        <v-img class="ma-auto" src="../assets/loading.png" height="45%" width="45%"></v-img>
+        <v-img
+          class="ma-auto"
+          src="../assets/loading.png"
+          height="50vh"
+          width="50vw"
+          contain
+        >
+        </v-img>
       </template>
       <template v-slot:no-results>
         <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots">
           Results Not Found
         </h3>
-        <v-img class="ma-auto" src="../assets/noresults.png" height="45%" width="45%"></v-img>
+        <v-img
+          class="ma-auto"
+          src="../assets/noresults.png"
+          height="50vh"
+          width="50vw"
+          contain
+        >
+        </v-img>
       </template>
       <template v-slot:no-data>
         <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots">
           No Data available. Retry after 2 min.
         </h3>
-        <v-img class="ma-auto" src="../assets/nodata.png" height="45%" width="45%"></v-img>
+        <v-img
+          class="ma-auto"
+          src="../assets/nodata.png"
+          height="50vh"
+          width="50vw"
+          contain
+        >
+        </v-img>
       </template>
     </v-data-iterator>
   </v-container>
@@ -180,8 +203,6 @@ export default {
 .img-size {
   border-radius: 100%;
   border: 10px;
-  max-width: 75%;
-  max-height: 500px;
 }
 
 .no-underline {
