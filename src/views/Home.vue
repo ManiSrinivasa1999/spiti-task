@@ -1,7 +1,9 @@
 <template>
   <v-container fluid>
-    <router-link to="/" class="text-h3 font-weight-bold mb-5 black--text no-underline">
-      Cat Breeds
+    <router-link to="/" class="text-h2 font-weight-bold mb-5 black--text no-underline">
+      <span class="heading">
+        Cat Breeds
+      </span>
     </router-link>
     <v-data-iterator
       :items="breedsData"
@@ -34,12 +36,10 @@
         <v-row>
           <v-col cols="12" xl="3" lg="3" md="6" sm="10" v-for="(breed, i) in props.items" :key="i">
             <v-container fluid>
-              <v-card class="text-center">
-                <img :src="breed.image.url" contain height="200px" width="240px" class="img-size" />
-                <v-card-text class="mt-4 text-center text-h6 black--text">
-                  {{ breed.name }}
-                </v-card-text>
-              </v-card>
+              <BreedCard
+                :breedName=breed.name
+                :breedUrl=breed.image.url
+              />
             </v-container>
           </v-col>
         </v-row>
@@ -105,9 +105,13 @@
 </template>
 <script>
 import axios from 'axios';
+import BreedCard from '@/components/BreedCard.vue';
 
 export default {
   name: 'Home',
+  components: {
+    BreedCard,
+  },
   data() {
     return {
       breedsDataPerPageArray: [4, 8, 12],
@@ -154,14 +158,19 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.heading {
+  font-family: 'Lobster', cursive !important;
+}
+
 .img-size {
-  border-radius: 50%;
-  display: inline-block;
-  margin: 15px;
-  border: 2px solid #333;
-  max-width: 55%;
-  max-height: 400px;
+  border-radius: 100%;
+  border: 10px;
+  max-width: 75%;
+  max-height: 500px;
 }
 
 .no-underline {
