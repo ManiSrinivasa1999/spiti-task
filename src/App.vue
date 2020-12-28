@@ -4,17 +4,16 @@
   <v-app class="bg-color">
     <v-app-bar
       fixed
+      height="64px"
       color="accent"
       dark
-      shrink-on-scroll
-      prominent
       elevate-on-scroll
       scroll-threshold="100"
       app
     >
-      <h1 class="ma-auto warning--text">Kitties</h1>
-
-      <v-spacer></v-spacer>
+      <h1 class="ma-auto warning--text text-h3 font-weight-bold heading">
+        Cat<span class="white--text">alogue</span>
+      </h1>
     </v-app-bar>
     <!-- Sizes your content based upon application components -->
     <v-main app>
@@ -44,7 +43,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bg-color {
-  background-color: #262E39 !important;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+  .heading {
+    font-family: 'Inter', sans-serif;
+  }
+  .bg-color {
+    background-color: #262e39 !important;
+  }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="3">
+      <v-col cols="12" lg="3" class="sticky-pos">
         <v-card class="sticky-pos rounded-xl" color="secondary">
           <v-card-title class="white--text">
             Search & Filter
@@ -17,10 +17,69 @@
               append-icon="fas fa-search"
               label="Search"
             ></v-text-field>
+            <v-expansion-panels class="mt-4" dark>
+              <v-expansion-panel class="secondary">
+                <v-expansion-panel-header>Filters</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <h6 class="text-h6">
+                    Hairless
+                  </h6>
+                  <v-btn-toggle v-model="hairless" tile color="warning" group>
+                    <v-btn value="yes">
+                      Yes
+                    </v-btn>
+
+                    <v-btn value="no">
+                      No
+                    </v-btn>
+
+                    <v-btn value="both">
+                      Both
+                    </v-btn>
+                  </v-btn-toggle>
+                  <h6 class="text-h6">
+                    Rare
+                  </h6>
+                  <v-btn-toggle v-model="rare" tile color="warning" group>
+                    <v-btn value="yes">
+                      Yes
+                    </v-btn>
+
+                    <v-btn value="no">
+                      No
+                    </v-btn>
+
+                    <v-btn value="both">
+                      Both
+                    </v-btn>
+                  </v-btn-toggle>
+                  <h6 class="text-h6">
+                    Energy Level
+                  </h6>
+                  <v-range-slider
+                    v-model="energyLevel"
+                    max="5"
+                    min="0"
+                    ticks
+                    color="warning"
+                  ></v-range-slider>
+                  <h6 class="text-h6">
+                    Affection Level
+                  </h6>
+                  <v-range-slider
+                    v-model="affectionLevel"
+                    max="5"
+                    min="0"
+                    ticks
+                    color="warning"
+                  ></v-range-slider>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="9">
+      <v-col cols="12" lg="9">
         <v-data-iterator
           :items="filteredBreedsData"
           :search="search"
@@ -36,12 +95,18 @@
             <v-row>
               <v-col
                 cols="12"
-                xl="3" lg="4" md="6" sm="10" v-for="(breed, i) in props.items" :key="i">
+                xl="3"
+                lg="4"
+                md="6"
+                sm="6"
+                v-for="(breed, i) in props.items"
+                :key="i"
+              >
                 <v-container fluid>
                   <BreedCard
-                    :breedName='breed.name'
-                    :breedUrl='breed.url'
-                    :breedData='breed.data'
+                    :breedName="breed.name"
+                    :breedUrl="breed.url"
+                    :breedData="breed.data"
                   />
                 </v-container>
               </v-col>
@@ -49,10 +114,18 @@
           </template>
           <template v-slot:footer>
             <v-row class="mt-2 ml-2" align="center" justify="center">
-              <span class="white--text" v-if="$vuetify.breakpoint.mdAndUp">Breeds per page</span>
+              <span class="white--text" v-if="$vuetify.breakpoint.mdAndUp"
+                >Breeds per page</span
+              >
               <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn text color="white" class="ml-2" v-bind="attrs" v-on="on">
+                  <v-btn
+                    text
+                    color="white"
+                    class="ml-2"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
                     {{ breedsDataPerPage }}
                     <v-icon>fas fa-caret-down</v-icon>
                   </v-btn>
@@ -70,9 +143,7 @@
 
               <v-spacer></v-spacer>
 
-              <span
-                class="mr-4 white--text"
-              >
+              <span class="mr-4 white--text">
                 Page {{ page }} of {{ numberOfPages }}
               </span>
               <v-btn fab dark small class="mr-1" @click="formerPage">
@@ -84,11 +155,10 @@
             </v-row>
           </template>
           <template v-slot:loading>
-            <v-progress-linear
-              indeterminate
-              color="info"
-            ></v-progress-linear>
-            <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots warning--text">
+            <v-progress-linear indeterminate color="info"></v-progress-linear>
+            <h3
+              class="text-h3 ma-3 text-center font-weight-bold all-slots warning--text"
+            >
               Loading.....
             </h3>
             <v-img
@@ -101,7 +171,9 @@
             </v-img>
           </template>
           <template v-slot:no-results>
-            <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots warning--text">
+            <h3
+              class="text-h3 ma-3 text-center font-weight-bold all-slots warning--text"
+            >
               Results Not Found
             </h3>
             <v-img
@@ -114,8 +186,10 @@
             </v-img>
           </template>
           <template v-slot:no-data>
-            <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots warning--text">
-              No Data available. Retry after 2 min.
+            <h3
+              class="text-h3 ma-3 text-center font-weight-bold all-slots warning--text"
+            >
+              No Data available.
             </h3>
             <v-img
               class="ma-auto"
@@ -154,6 +228,7 @@ export default {
         'Life Span',
         'Energy Level',
         'Child Friendly',
+        'Hairless',
       ],
       success: true,
       page: 1,
@@ -161,6 +236,10 @@ export default {
       breedsDataPerPage: 8,
       breedsData: [],
       error: false,
+      hairless: 'both',
+      rare: 'both',
+      energyLevel: [0, 5],
+      affectionLevel: [0, 5],
     };
   },
   mounted() {
@@ -173,8 +252,39 @@ export default {
       });
   },
   methods: {
+    hairlessFilter(breed) {
+      if (breed.data.hairless === 0 && this.hairless === 'yes') {
+        return false;
+      }
+      if (breed.data.hairless === 1 && this.hairless === 'no') {
+        return false;
+      }
+      return true;
+    },
+    rareFilter(breed) {
+      if (breed.data.rare === 0 && this.rare === 'yes') {
+        return false;
+      }
+      if (breed.data.rare === 1 && this.rare === 'no') {
+        return false;
+      }
+      return true;
+    },
+    energyLevelFilter(breed) {
+      return (
+        this.energyLevel[0] <= breed.data.energy_level
+          && breed.data.energy_level <= this.energyLevel[1]
+      );
+    },
+    affectionLevelFilter(breed) {
+      return (
+        this.affectionLevel[0] <= breed.data.affection_level
+          && breed.data.affection_level <= this.affectionLevel[1]
+      );
+    },
     setBreedsData(response) {
       this.breedsData = response.data;
+      this.loading = false;
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
@@ -194,8 +304,9 @@ export default {
       return this.keys.filter((key) => key !== 'Name');
     },
     filteredBreedsData() {
-      const breeds = [];
-      this.breedsData.forEach((breed) => {
+      let breeds = [];
+      for (let index = 0; index < this.breedsData.length; index += 1) {
+        const breed = this.breedsData[index];
         if ('image' in breed) {
           breeds.push({
             name: breed.name,
@@ -219,7 +330,12 @@ export default {
             },
           });
         }
-      });
+      }
+      // filter
+      breeds = breeds.filter(this.hairlessFilter);
+      breeds = breeds.filter(this.rareFilter);
+      breeds = breeds.filter(this.energyLevelFilter);
+      breeds = breeds.filter(this.affectionLevelFilter);
       return breeds;
     },
   },
@@ -227,22 +343,23 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-.heading {
-  font-family: 'Inter', sans-serif;
-}
+  .heading {
+    font-family: 'Inter', sans-serif;
+  }
 
-.all-slots {
-  font-family: 'Inter', sans-serif;
-}
+  .all-slots {
+    font-family: 'Inter', sans-serif;
+  }
 
-.no-underline {
-  text-decoration: none !important;
-}
+  .no-underline {
+    text-decoration: none !important;
+  }
 
-.sticky-pos {
-  position: sticky !important;
-  top: 100px !important;
-}
+  .sticky-pos {
+    position: sticky !important;
+    top: 64px !important;
+    z-index: 100 !important;
+  }
 </style>
