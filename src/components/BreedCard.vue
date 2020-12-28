@@ -3,26 +3,30 @@
     <v-dialog
       v-model="dialog"
       persistent
-      max-width="700"
+      max-width="500"
     >
       <template v-slot:activator="{ on, attrs }">
-        <img
+        <v-img
           :src="breedUrl"
-          contain
+          cover
+          eager
           height="240px"
           width="240px"
-          class="img-size ma-2"
+          class="img-size ma-auto"
           v-bind="attrs"
           v-on="on"
-        />
+        ></v-img>
       </template>
       <v-card>
-        <img
+        <v-img
           :src="breedUrl"
-          contain
-          width="100%"
-          height="500"
-        />
+          cover
+          width="500"
+          height="50%"
+          max-height="100vh"
+          max-width="100vw"
+          :alt="breedName"
+        ></v-img>
         <v-card-title class="text-h3">
           <span class="breed-name">
             {{ breedName }}
@@ -38,10 +42,10 @@
                 rotate="-90"
                 :size="100"
                 :width="10"
-                :value="breedChildFriendly*20"
+                :value="breedData.child_friendly*20"
                 color="blue"
               >
-                {{ breedChildFriendly }}
+                {{ breedData.child_friendly }}
               </v-progress-circular>
             </v-col>
             <v-col cols="6" class="text-center">
@@ -52,10 +56,10 @@
                 rotate="-90"
                 :size="100"
                 :width="10"
-                :value="breedEnergyLevel*20"
+                :value="breedData.energy_level*20"
                 color="green"
               >
-                {{ breedEnergyLevel }}
+                {{ breedData.energy_level }}
               </v-progress-circular>
             </v-col>
           </v-row>
@@ -78,7 +82,7 @@
       </span>
     </v-card-text>
     <v-card-text class="text-center black--text text-h6">
-      <span class="breed-name"> Lifespan: {{ breedSpan }} </span>
+      <span class="breed-name"> Lifespan: {{ breedData.life_span }} </span>
     </v-card-text>
   </v-card>
 </template>
@@ -93,14 +97,8 @@ export default {
     breedUrl: {
       default: 'breed url',
     },
-    breedSpan: {
-      default: 'breed life span',
-    },
-    breedEnergyLevel: {
-      default: 'breed energy level',
-    },
-    breedChildFriendly: {
-      default: 'breed child friendly',
+    breedData: {
+      default: 'breed data',
     },
   },
   data() {
@@ -112,13 +110,13 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 .img-size {
   border-radius: 100% !important;
   border: 10px;
 }
 
 .breed-name {
-  font-family: "Permanent Marker", cursive !important;
+  font-family: 'Inter', sans-serif;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-data-iterator
-      :items="breedsData"
+      :items="filteredBreedsData"
       :search="search"
       :page="page"
       :items-per-page.sync="breedsDataPerPage"
@@ -14,7 +14,7 @@
       <template v-slot:header>
         <v-row justify="end">
           <v-col cols="12" md="6" sm="12" xs="12">
-            <router-link to="/" class="text-h2 font-weight-bold mb-5 black--text no-underline">
+            <router-link to="/" class="text-h2 font-weight-bold mb-5 warning--text no-underline">
               <span class="heading ma-3">
                 Cat Breeds
               </span>
@@ -39,11 +39,9 @@
           <v-col cols="12" xl="3" lg="4" md="6" sm="10" v-for="(breed, i) in props.items" :key="i">
             <v-container fluid>
               <BreedCard
-                :breedName=breed.name
-                :breedUrl=breed.image.url
-                :breedSpan=breed.life_span
-                :breedEnergyLevel=breed.energy_level
-                :breedChildFriendly=breed.child_friendly
+                :breedName='breed.name'
+                :breedUrl='breed.url'
+                :breedData='breed.data'
               />
             </v-container>
           </v-col>
@@ -51,10 +49,10 @@
       </template>
       <template v-slot:footer>
         <v-row class="mt-2 ml-2" align="center" justify="center">
-          <span class="black--text" v-if="$vuetify.breakpoint.mdAndUp">Breeds per page</span>
+          <span class="white--text" v-if="$vuetify.breakpoint.mdAndUp">Breeds per page</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn dark text color="secondary" class="ml-2" v-bind="attrs" v-on="on">
+              <v-btn text color="white" class="ml-2" v-bind="attrs" v-on="on">
                 {{ breedsDataPerPage }}
                 <v-icon>fas fa-caret-down</v-icon>
               </v-btn>
@@ -73,15 +71,14 @@
           <v-spacer></v-spacer>
 
           <span
-            class="mr-4
-            grey--text"
+            class="mr-4 white--text"
           >
             Page {{ page }} of {{ numberOfPages }}
           </span>
-          <v-btn fab dark class="mr-1" @click="formerPage">
+          <v-btn fab dark small class="mr-1" @click="formerPage">
             <v-icon>fas fa-chevron-left</v-icon>
           </v-btn>
-          <v-btn fab dark class="ml-1 mr-4 mb-1" @click="nextPage">
+          <v-btn fab dark small class="ml-1 mr-4 mb-1" @click="nextPage">
             <v-icon>fas fa-chevron-right</v-icon>
           </v-btn>
         </v-row>
@@ -89,9 +86,9 @@
       <template v-slot:loading>
         <v-progress-linear
           indeterminate
-          color="green"
+          color="info"
         ></v-progress-linear>
-        <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots">
+        <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots warning--text">
           Loading.....
         </h3>
         <v-img
@@ -104,7 +101,7 @@
         </v-img>
       </template>
       <template v-slot:no-results>
-        <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots">
+        <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots warning--text">
           Results Not Found
         </h3>
         <v-img
@@ -117,7 +114,7 @@
         </v-img>
       </template>
       <template v-slot:no-data>
-        <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots">
+        <h3 class="text-h3 ma-3 text-center font-weight-bold all-slots warning--text">
           No Data available. Retry after 2 min.
         </h3>
         <v-img
@@ -135,6 +132,9 @@
 <script>
 import axios from 'axios';
 import BreedCard from '@/components/BreedCard.vue';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const noImage = require('@/assets/noresults.svg');
 
 export default {
   name: 'Home',
@@ -185,14 +185,27 @@ export default {
     filteredBreedsData() {
       const breeds = [];
       this.breedsData.forEach((breed) => {
-        console.log(breed.image.url);
-        if (breed.image.url !== '') {
+        if ('image' in breed) {
           breeds.push({
             name: breed.name,
             url: breed.image.url,
-            lifeSpan: breed.life_span,
-            energyLevel: breed.energy_level,
-            childFriendly: breed.child_friendly,
+            data: {
+              ...breed,
+            },
+            // lifeSpan: breed.life_span,
+            // energyLevel: breed.energy_level,
+            // childFriendly: breed.child_friendly,
+          });
+        } else {
+          breeds.push({
+            name: breed.name,
+            url: noImage,
+            data: {
+              // lifeSpan: breed.life_span,
+              // energyLevel: breed.energy_level,
+              // childFriendly: breed.child_friendly,
+              ...breed,
+            },
           });
         }
       });
@@ -203,16 +216,14 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 .heading {
-  font-family: 'Lobster', cursive !important;
+  font-family: 'Inter', sans-serif;
 }
 
 .all-slots {
-  font-family: 'Merriweather', serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .img-size {
