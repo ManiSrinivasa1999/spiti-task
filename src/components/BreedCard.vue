@@ -40,77 +40,77 @@
               <h5 class="text-h5 mb-2 font-weight-bold">
                 Child Friendly
               </h5>
-              <v-progress-circular
-                rotate="-90"
-                :size="100"
-                :width="10"
+              <v-progress-linear
+                height="25"
                 :value="breedData.child_friendly*20"
                 color="blue"
+                striped
+                class="white--text"
               >
                 {{ breedData.child_friendly }} / 5
-              </v-progress-circular>
+              </v-progress-linear>
               <h5 class="text-h5 mb-2 font-weight-bold">
                 Intelligence
               </h5>
-              <v-progress-circular
-                rotate="-90"
-                :size="100"
-                :width="10"
+              <v-progress-linear
+                height="25"
+                striped
                 :value="breedData.intelligence*20"
                 color="primary"
+                class="white--text"
               >
                 {{ breedData.intelligence }} / 5
-              </v-progress-circular>
+              </v-progress-linear>
               <h5 class="text-h5 mb-2 font-weight-bold">
                 Adaptability
               </h5>
-              <v-progress-circular
-                rotate="-90"
-                :size="100"
-                :width="10"
+              <v-progress-linear
+                height="25"
+                striped
                 :value="breedData.adaptability*20"
-                color="accent"
+                color="indigo darken-2"
+                class="white--text"
               >
                 {{ breedData.adaptability }} / 5
-              </v-progress-circular>
+              </v-progress-linear>
             </v-col>
             <v-col cols="6" class="text-center">
               <h5 class="text-h5 mb-2 font-weight-bold">
                 Energy Level
               </h5>
-              <v-progress-circular
-                rotate="-90"
-                :size="100"
-                :width="10"
+              <v-progress-linear
+                class="white--text"
+                height="25"
+                striped
                 :value="breedData.energy_level*20"
                 color="green"
               >
                 {{ breedData.energy_level }} / 5
-              </v-progress-circular>
+              </v-progress-linear>
               <h5 class="text-h5 mb-2 font-weight-bold">
                 Social Needs
               </h5>
-              <v-progress-circular
-                rotate="-90"
-                :size="100"
-                :width="10"
+              <v-progress-linear
+                class="white--text"
+                height="25"
+                striped
                 :value="breedData.social_needs*20"
                 color="red"
               >
                 {{ breedData.social_needs }} / 5
-              </v-progress-circular>
+              </v-progress-linear>
               <h5 class="text-h5 mb-2 font-weight-bold">
                 Affection Level
               </h5>
-              <v-progress-circular
-                rotate="-90"
-                :size="100"
-                :width="10"
+              <v-progress-linear
+                class="white--text"
+                height="25"
+                striped
                 :value="breedData.affection_level*20"
                 color="warning"
               >
                 {{ breedData.affection_level }} / 5
-              </v-progress-circular>
+              </v-progress-linear>
             </v-col>
           </v-row>
         </v-card-text>
