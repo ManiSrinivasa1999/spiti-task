@@ -16,7 +16,7 @@
           <v-col cols="12" md="6" sm="12" xs="12">
             <router-link to="/" class="text-h2 font-weight-bold mb-5 warning--text no-underline">
               <span class="heading ma-3">
-                Cat Breeds
+                Kittes
               </span>
             </router-link>
           </v-col>
@@ -147,6 +147,12 @@ export default {
       search: '',
       sortDesc: true,
       sortBy: 'name',
+      keys: [
+        'Name',
+        'Life Span',
+        'Energy Level',
+        'Child Friendly',
+      ],
       success: true,
       page: 1,
       loading: true,
@@ -181,6 +187,9 @@ export default {
   computed: {
     numberOfPages() {
       return Math.ceil(this.breedsData.length / this.breedsDataPerPage);
+    },
+    filteredKeys() {
+      return this.keys.filter((key) => key !== 'Name');
     },
     filteredBreedsData() {
       const breeds = [];
@@ -224,11 +233,6 @@ export default {
 
 .all-slots {
   font-family: 'Inter', sans-serif;
-}
-
-.img-size {
-  border-radius: 100%;
-  border: 10px;
 }
 
 .no-underline {

@@ -29,6 +29,6 @@ export default {
 
 <style lang="scss" scoped>
 .bg-color {
-  background-color: #000000 !important;
+  background-color: #262E39 !important;
 }
 </style>
