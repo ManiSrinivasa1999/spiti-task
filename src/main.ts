@@ -16,6 +16,7 @@ import {
   faArrowUp,
   faArrowDown,
   faCaretUp,
+  faHeart,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faStaylinked,
@@ -48,6 +49,7 @@ library.add(
   faSearch,
   faArrowUp,
   faArrowDown,
+  faHeart,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

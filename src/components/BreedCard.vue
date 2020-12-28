@@ -125,7 +125,7 @@
           </v-btn>
           <a :href="breedData.wikipedia_url" target="_blank" class="no-underline">
             <v-btn text color="primary">
-              Know More
+              WIKI
             </v-btn>
           </a>
         </v-card-actions>
@@ -139,7 +139,21 @@
           </span>
         </v-card-text>
         <v-card-text class="white--text pt-0 d-flex align-center justify-space-between">
-          <span class="breed-name"> Lifespan: {{ breedData.life_span }} </span>
+          <span class="breed-name">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon
+                  color="red"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  fas fa-heart
+                </v-icon>
+              </template>
+              <span>Life span</span>
+            </v-tooltip>
+            {{ breedData.life_span }} Years
+          </span>
           <v-btn text @click="dialog = true" color="primary">
             Know More
           </v-btn>
