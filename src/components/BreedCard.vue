@@ -1,13 +1,6 @@
 <template>
-  <v-card
-    class="rounded-xl"
-    color="secondary"
-  >
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="500"
-    >
+  <v-card class="rounded-xl" color="secondary">
+    <v-dialog v-model="dialog" persistent max-width="500">
       <template v-slot:activator="{ on, attrs }">
         <v-img
           :src="breedUrl"
@@ -42,9 +35,8 @@
               </h5>
               <v-progress-linear
                 height="25"
-                :value="breedData.child_friendly*20"
+                :value="breedData.child_friendly * 20"
                 color="blue"
-                striped
                 class="white--text"
               >
                 {{ breedData.child_friendly }} / 5
@@ -54,8 +46,7 @@
               </h5>
               <v-progress-linear
                 height="25"
-                striped
-                :value="breedData.intelligence*20"
+                :value="breedData.intelligence * 20"
                 color="primary"
                 class="white--text"
               >
@@ -66,8 +57,7 @@
               </h5>
               <v-progress-linear
                 height="25"
-                striped
-                :value="breedData.adaptability*20"
+                :value="breedData.adaptability * 20"
                 color="indigo darken-2"
                 class="white--text"
               >
@@ -81,8 +71,7 @@
               <v-progress-linear
                 class="white--text"
                 height="25"
-                striped
-                :value="breedData.energy_level*20"
+                :value="breedData.energy_level * 20"
                 color="green"
               >
                 {{ breedData.energy_level }} / 5
@@ -93,8 +82,7 @@
               <v-progress-linear
                 class="white--text"
                 height="25"
-                striped
-                :value="breedData.social_needs*20"
+                :value="breedData.social_needs * 20"
                 color="red"
               >
                 {{ breedData.social_needs }} / 5
@@ -105,8 +93,7 @@
               <v-progress-linear
                 class="white--text"
                 height="25"
-                striped
-                :value="breedData.affection_level*20"
+                :value="breedData.affection_level * 20"
                 color="warning"
               >
                 {{ breedData.affection_level }} / 5
@@ -116,11 +103,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >
+          <v-btn color="green darken-1" text @click="dialog = false">
             Close
           </v-btn>
           <a :href="breedData.wikipedia_url" target="_blank" class="no-underline">
@@ -142,11 +125,7 @@
           <span class="breed-name">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
-                <v-icon
-                  color="red"
-                  v-bind="attrs"
-                  v-on="on"
-                >
+                <v-icon color="red" v-bind="attrs" v-on="on">
                   fas fa-heart
                 </v-icon>
               </template>
@@ -154,7 +133,7 @@
             </v-tooltip>
             {{ breedData.life_span }} Years
           </span>
-          <v-btn text @click="dialog = true" color="primary">
+          <v-btn text @click="dialog = true" color="warning">
             Know More
           </v-btn>
         </v-card-text>
@@ -186,9 +165,9 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 .breed-name {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 </style>

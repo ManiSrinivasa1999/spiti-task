@@ -2,8 +2,8 @@
   <v-container>
     <v-row>
       <v-col cols="12" md="3">
-        <v-card dark rounded class="sticky-pos">
-          <v-card-title>
+        <v-card class="sticky-pos rounded-xl" color="secondary">
+          <v-card-title class="white--text">
             Search & Filter
           </v-card-title>
           <v-card-text>

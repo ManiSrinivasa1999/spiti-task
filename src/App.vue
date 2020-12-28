@@ -12,7 +12,7 @@
       scroll-threshold="100"
       app
     >
-      <h1 class="ma-auto">Kitties</h1>
+      <h1 class="ma-auto warning--text">Kitties</h1>
 
       <v-spacer></v-spacer>
     </v-app-bar>
@@ -25,8 +25,10 @@
       </v-container>
     </v-main>
 
-    <v-footer app>
-      <!-- -->
+    <v-footer color="accent" class="ma-auto">
+      <h3 class="warning--text">
+        Kitties Copyright &copy;2020
+      </h3>
     </v-footer>
   </v-app>
 </template>
